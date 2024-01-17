@@ -1,9 +1,9 @@
 const{Model,DataTypes}=require('sequelize');
 const sequelize=require('../config/connecetion');
 
-class Recepie extends Model{}
+class Recipe extends Model{}
 
-Recepie.init({
+Recipe.init({
     id:{
         type:DataTypes.INTEGER,
         allowNull:false,
@@ -35,5 +35,5 @@ Recepie.init({
     timestamps:false,
     underscores:true,
     freezeTableName:true,
-    modelName:'Recepie',
+    modelName:'Recipe',
 });
