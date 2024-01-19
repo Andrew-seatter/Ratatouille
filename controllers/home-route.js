@@ -41,3 +41,5 @@ router.get('/user/:id', withAuth, async (req, res) => {
 
     const user = userDb.get
 })
+
+module.exports = router;

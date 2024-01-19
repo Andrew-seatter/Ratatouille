@@ -54,4 +54,4 @@ Recipe.init(
   }
 );
 
-module.exports = {Recipe};
+module.exports = Recipe;
