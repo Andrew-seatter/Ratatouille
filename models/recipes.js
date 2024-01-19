@@ -10,13 +10,21 @@ Recipe.init({
         primaryKey:true,
         autoIncrement:true
     },
-    name:{
+    author:{
         type:DataTypes.STRING,
         allowNull:false,
     },
-    description:{
+    title:{
         type:DataTypes.STRING,
         allowNull:false,
+    },
+    instructions:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    },
+    ingredients:{
+    type:DataTypes.STRING,
+    allowNull:false,
     },
     comments:{
         type:DataTypes.STRING,
@@ -28,6 +36,10 @@ Recipe.init({
             model:'user',
             key:'id',
         },
+    },
+    image:{
+    type:DataTypes.STRING,
+    allowNull:false,
     },
 },
 {
