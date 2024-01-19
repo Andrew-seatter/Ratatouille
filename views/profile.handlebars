@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{username}} - Profile</title>
+    <title>{{User.name}} - Profile</title>
 </head>
 <body>
     {{> navbar}}
 
     <div class="container">
-        <h1>{{username}}'s Profile</h1>
-        <img src="{{avatar}}" alt="{{username}}">
-
-        <p>Bio: {{bio}}</p>
-
+        <h1>{{User.name}}'s Profile</h1>
+        <img src="{{avatar}}" alt="{{User.name}}">
+        <p>Bio: {{User.bio}}</p>
         <h2>My Recipes</h2>
-        <div class="user-recipes">
-        </div>
-
         <h2>Favorite Recipes</h2>
-        <div class="favorite-recipes">
-        </div>
     </div>
 </body>
 </html>
