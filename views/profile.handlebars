@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{User.name}} - Profile</title>
+</head>
+<body>
+    {{> navbar}}
+
+    <div class="container">
+        <h1>{{User.name}}'s Profile</h1>
+        <img src="{{avatar}}" alt="{{User.name}}">
+        <p>Bio: {{User.bio}}</p>
+        <h2>My Recipes</h2>
+        <h2>Favorite Recipes</h2>
+    </div>
+</body>
+</html>

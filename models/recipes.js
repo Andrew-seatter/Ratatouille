@@ -1,15 +1,16 @@
-const{Model,DataTypes}=require('sequelize');
-const sequelize=require('../config/connecetion');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connecetion');
 
-class Recipe extends Model{}
+class Recipe extends Model { }
 
 Recipe.init({
-    id:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        primaryKey:true,
-        autoIncrement:true
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
+
     author:{
         type:DataTypes.STRING,
         allowNull:false,
@@ -30,11 +31,12 @@ Recipe.init({
         type:DataTypes.STRING,
         allowNull:false,
     },
-    user_id:{
-        type:DataTypes.INTEGER,
-        references:{
-            model:'user',
-            key:'id',
+      
+    user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id',
         },
     },
     image:{
@@ -42,10 +44,10 @@ Recipe.init({
     allowNull:false,
     },
 },
-{
-    sequelize,
-    timestamps:false,
-    underscores:true,
-    freezeTableName:true,
-    modelName:'Recipe',
-});
+    {
+        sequelize,
+        timestamps: false,
+        underscores: true,
+        freezeTableName: true,
+        modelName: 'Recipe',
+    });
