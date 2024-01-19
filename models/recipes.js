@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connecetion");
+const sequelize = require("../config/connection");
 
 class Recipe extends Model {}
 
@@ -53,3 +53,5 @@ Recipe.init(
     modelName: "Recipe",
   }
 );
+
+module.exports = {Recipe};
