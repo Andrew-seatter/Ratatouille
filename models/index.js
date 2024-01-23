@@ -22,13 +22,13 @@ Comments.belongsTo(User,{
 });
 
 Recipes.hasMany(Comments,{
-    foreignKey:recipe_id,
+    foreignKey: 'recipe_id',
     onDelete:'CASCADE'
 
 });
 
 Comments.belongsTo(Recipes,{
-    foreignKey:recipe_id,
+    foreignKey:'recipe_id',
 })
 
 
