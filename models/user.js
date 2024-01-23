@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const sequelize = require("../config/connection");
 
 
@@ -31,7 +31,8 @@ User.init(
     },
     bio: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '',
     },
     password: {
       type: DataTypes.STRING,
@@ -42,18 +43,19 @@ User.init(
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: '',
     },
   },
   {
     hooks: {
       beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt(newUserData.password, 10);
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
 
       beforeUpdate: async (updateUserData) => {
-        updateUserData.password = await bcrypt(updateUserData.password, 10);
+        updateUserData.password = await bcrypt.hash(updateUserData.password, 10);
         return updateUserData;
       },
     },
