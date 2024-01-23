@@ -32,4 +32,6 @@ Comments.belongsTo(Recipes,{
 })
 
 
+
 module.exports= {User, Recipes,Comments}
+
