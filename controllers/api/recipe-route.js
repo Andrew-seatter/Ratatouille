@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { Recipe } = require('../../models/recipes');
-
-router.post('/', async (req, res) => {
+const multer  = require('multer');
+const upload = multer();
+router.post('/',upload.single("image") ,async (req, res) => {
   try {
     const newRecipe = await Recipe.create({
       ...req.body,
@@ -13,7 +14,6 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
-
 
 
 router.delete('/:id', async (req, res) => {
