@@ -7,7 +7,9 @@ async function newFormHandler(event){
     const instructions=document.querySelector('#instructions').value;
     const comments=document.querySelector('#comments').value;
     const userid=document.querySelector('#userid').value;
-
+    document.getElementById("myForm").enctype = "multipart/form-data";
+    document.getElementById("myForm").method = "post";
+    document.getElementById("myForm").action = "/api/users";
 
 const response = await fetch(`api/recipe`,{
     method:'POST',

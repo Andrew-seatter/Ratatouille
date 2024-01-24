@@ -3,7 +3,7 @@
   <h2>
     Add Recipe
   </h2>
-  <form class="add-recipe-form">
+  <form id="myForm" class="add-recipe-form">
      <label for="author">
       Author:
     </label>
@@ -40,7 +40,7 @@
       Image:
     </label>
      <br />
-    <textarea id="image" name="image" rows="2" cols="30">
+    <input type="file" id="image" name="image" rows="2" cols="30">
       {{image}}
     </textarea>
   <button type="submit" value="Submit">
