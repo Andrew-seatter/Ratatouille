@@ -3,6 +3,8 @@ const {User, Recipe} = require('../models/index');
 
 const withAuth = require('../utils/auth');
 
+
+//login page
 router.get('/login', async (req, res) => {
 try {
     res.render('login', {
@@ -13,6 +15,8 @@ try {
 }
 });
 
+
+//home page
 router.get('/', withAuth, async (req, res) => {
     try{
         const recipeDb = await Recipe.findAll({
@@ -37,6 +41,7 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
+//own person's profile route
 router.get('/profile', withAuth, async (req, res) => {
     try {
         // Find the logged in user based on the session ID
@@ -56,9 +61,10 @@ router.get('/profile', withAuth, async (req, res) => {
       }
 });
 
+
+//someone else's profile route
 router.get('/profile/:id', withAuth, async (req, res) => {
     try {
-        // Find the logged in user based on the session ID
         const userData = await User.findByPk(req.body.id, {
           attributes: { exclude: ['password'] },
           include: [{ model: Recipe }],
@@ -73,6 +79,31 @@ router.get('/profile/:id', withAuth, async (req, res) => {
       } catch (err) {
         res.status(500).json(err)
       }
+});
+
+//Allrecipes/Explore page
+router.get('/explore', withAuth, async (req,res) => {
+  try{
+    const recipeDb = await Recipe.findAll({
+      include: [
+          {
+              model: User,
+              attributes: ['name']
+          },
+      ],
+  });
+
+  const recipes = recipeDb.map((recipe) =>
+  recipe.get({plain: true}));
+
+  res.render('explore', {
+      recipes,
+      loggedIn: req.session.loggedIn,
+  });
+} catch (err) {
+  console.log(err);
+  res.status(500).json(err);
+}
 });
 
 module.exports = router;
