@@ -97,7 +97,7 @@ router.get('/explore', withAuth, async (req,res) => {
   recipe.get({plain: true}));
 
   res.render('explore', {
-      recipes,
+      ...recipes,
       loggedIn: req.session.loggedIn,
   });
 } catch (err) {
@@ -107,3 +107,15 @@ router.get('/explore', withAuth, async (req,res) => {
 });
 
 module.exports = router;
+
+
+router.get('/post', withAuth, async (req, res) => {
+  try{
+    res.render('addRecipe', {
+      loggedIn: req.session.loggedIn,
+    });
+  } catch {
+    console.log(err);
+    res.status(500),json(err);
+  }
+})
