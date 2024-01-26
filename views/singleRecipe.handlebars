@@ -1,11 +1,10 @@
-<p>Please log in to leave comments</p>
 <div class="recipe-card">
     <div class="card-header">
         <h5>{{Recipe.title}}</h5>
         <h8>Posted by {{Recipe.user.name}} on {{formatDate Recipe.created_at}}</h6>
-    </div>  
-    <div class="card-body">  
-     <img src="{{Recipe.image}}" alt="{{Recipe.author}}">
+    </div>
+    <div class="card-body">
+        <img src="{{Recipe.image}}" alt="{{Recipe.author}}">
 
         <h2>Instructions</h2>
         <p>{{Recipe.instructions}}</p>
@@ -14,21 +13,25 @@
         <p>{{Recipe.ingredients}}</p>
     </div>
     <div class="card-body comment">
-            {{> comments Recipe.comments}}
+        {{#if Recipe.comments.length}}
+        {{> comments Recipe.comments}}
+        {{/if}}
     </div>
-</div> 
+</div>
 
-<input type="hidden" name="recipe-id" value="{{Recipe.id}}"/>
+<input type="hidden" name="recipe-id" value="{{Recipe.id}}" />
 
 {{#if loggedIn}}
 <div class="card">
     <div class="card-header"></div>
     <form class="card-body comment-form">
         <p class="form-label">Leave Comment:</p>
-        <textarea class="form-input" id="comment" name="comment-body"></textarea>    
-        <button type="submit" class="btn btn-primary">Submit Comment</button>        
-    </form>               
+        <textarea class="form-input" id="comment" name="comment-body"></textarea>
+        <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
 </div>
 {{/if}}
 
+{{#if loggedIn}}
 <script src="../public/js/comments.js"></script>
+{{/if}}

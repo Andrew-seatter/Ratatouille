@@ -1,23 +1,13 @@
 <a href="/recipe/{{id}}">
-<div class="recipe-card">
 <div class="recipe-card-header">
     {{Recipe.title}}
   </div>
   <div class="card-body">
 <img src="{{Recipe.image}}" alt="{{Recipe.author}}">
-
-        <p>By {{Recipe.user_id}}</p>
-
         <h2>Instructions</h2>
         <p>{{Recipe.instructions}}</p>
 
         <h2>Ingredients</h2>
         <p>{{Recipe.ingredients}}</p>
-
-        <h2>Comments</h2>
-        <p>{{Recipe.user_id}}: {{Recipe.comments}}</p>
     </div>
-    <p>By {{Recipe.user_id}}</p>
-    </div>
-</div>
 </a>

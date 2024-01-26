@@ -1,11 +1,11 @@
-     {{> navbar}}
+<div class="container">
+    <h1>Welcome to Ratatoullie!</h1>
 
-    <div class="container">
-        <h1>Welcome to Ratatoullie!</h1>
-        
-            <button type="submit">Search</button>
-        
-        <div class="all-recipes">
-        {{allRecipes}}
-        </div>
+    <button type="submit">Search</button>
+
+    <div class="all-recipes">
+        {{#each recipes as |Recipe|}}
+        {{> recipeCard Recipe }}
+        {{/each}}
     </div>
+</div>
