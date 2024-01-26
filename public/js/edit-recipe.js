@@ -35,4 +35,4 @@ if (response.ok) {
 
 document
   .querySelector('.new-recipe-form')
-  .addEventListener('submit', newFormHandler)
+  .addEventListener('submit', newFormHandler);
