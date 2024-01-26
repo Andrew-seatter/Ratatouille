@@ -1,8 +1,11 @@
 const router = require('express').Router();
-const {Recipe} = require('../models');
+const {User, Recipe} = require('../models/index');
+
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+
+//login page
+router.get('/login', async (req, res) => {
 try {
     res.render('login', {
        });
@@ -12,7 +15,9 @@ try {
 }
 });
 
-router.get('/home', withAuth, async (req, res) => {
+
+//home page
+router.get('/', withAuth, async (req, res) => {
     try{
         const recipeDb = await Recipe.findAll({
             include: [
@@ -32,14 +37,73 @@ router.get('/home', withAuth, async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.status(500),json(err);
+        res.status(500).json(err);
     }
 });
 
-router.get('/user/:id', withAuth, async (req, res) => {
-    const userDb = await User.findbyPk(req.params.id);
+//own person's profile route
+router.get('/profile', withAuth, async (req, res) => {
+    try {
+        // Find the logged in user based on the session ID
+        const userData = await User.findByPk(req.session.user_id, {
+          attributes: { exclude: ['password'] },
+          include: [{ model: Recipe }],
+        });
+    
+        const user = userData.get({ plain: true });
+    
+        res.render('profile', {
+          ...user,
+          logged_in: true
+        });
+      } catch (err) {
+        res.status(500).json(err)
+      }
+});
 
-    const user = userDb.get
-})
+
+//someone else's profile route
+router.get('/profile/:id', withAuth, async (req, res) => {
+    try {
+        const userData = await User.findByPk(req.body.id, {
+          attributes: { exclude: ['password'] },
+          include: [{ model: Recipe }],
+        });
+    
+        const user = userData.get({ plain: true });
+    
+        res.render('profile', {
+          ...user,
+          logged_in: true
+        });
+      } catch (err) {
+        res.status(500).json(err)
+      }
+});
+
+//Allrecipes/Explore page
+router.get('/explore', withAuth, async (req,res) => {
+  try{
+    const recipeDb = await Recipe.findAll({
+      include: [
+          {
+              model: User,
+              attributes: ['name']
+          },
+      ],
+  });
+
+  const recipes = recipeDb.map((recipe) =>
+  recipe.get({plain: true}));
+
+  res.render('explore', {
+      recipes,
+      loggedIn: req.session.loggedIn,
+  });
+} catch (err) {
+  console.log(err);
+  res.status(500).json(err);
+}
+});
 
 module.exports = router;

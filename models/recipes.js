@@ -21,16 +21,16 @@ Recipe.init(
       allowNull: false,
     },
     instructions: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
     ingredients: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
     comments: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
     user_id: {
@@ -42,7 +42,7 @@ Recipe.init(
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
