@@ -32,7 +32,6 @@ User.init(
     bio: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: '',
     },
     password: {
       type: DataTypes.STRING,
