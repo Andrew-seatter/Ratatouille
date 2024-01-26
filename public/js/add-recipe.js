@@ -1,31 +1,36 @@
+const submit = document.querySelector('#submit-button');
+
 async function newFormHandler(event){
     event.preventDefault();
 
-    const title =document.querySelector('#title').value;
-    const description=document.querySelector('#description').value;
-    const ingredients=document.querySelector('#ingredients').value;
-    const instructions=document.querySelector('#instructions').value;
-    const comments=document.querySelector('#comments').value;
-    const userid=document.querySelector('#userid').value;
-    document.getElementById("myForm").enctype = "multipart/form-data";
-    document.getElementById("myForm").method = "post";
-    document.getElementById("myForm").action = "/api/users";
+    const title = document.querySelector('#title').value;
+    const ingredients = document.querySelector('#ingredients').value;
+    const instructions = document.querySelector('#instructions').value;
+    const author = 'placholder';
+    const image = document.querySelector('#image').value;
+    const user_id = session.user_id;
+    
 
-const response = await fetch(`api/recipe`,{
+   // document.getElementById("myForm").enctype = "multipart/form-data";
+   // document.getElementById("myForm").method = "post";
+   //document.getElementById("myForm").action = "/api/users";
+   console.log('newFormHandler');
+
+const response = await fetch(`/api/recipe`,{
     method:'POST',
     body:JSON.stringify({
+        author, 
         title,
-        description,
         ingredients,
         instructions,
-        comments,
-        userid
-    }),
+        image,
+      }),
     headers:{
         'Content-Type':'application/json',
     },
 });
 if (response.ok) {
+   console.log(response);
     document.location.replace('/');
   } else {
     alert('Failed to add dish');
@@ -33,6 +38,5 @@ if (response.ok) {
 
 }
 
-document
-  .querySelector('.new-recipe-form')
-  .addEventListener('submit', newFormHandler)
+document.querySelector('.new-recipe-form');
+submit.addEventListener('click', newFormHandler);
