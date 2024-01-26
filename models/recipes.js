@@ -45,7 +45,22 @@ Recipe.init(
       allowNull: true,
     },
   },
-  {
+{
+   /* hooks: {
+      beforeCreate: async (newRecipe) => {
+        newRecipe.user_id = await User.findOne(req.body);
+        req.session.save(() => {
+          req.session.user_id = userData.id;
+        });
+      },
+
+      beforeUpdate: async (updatedRecipe) => {
+        updatedRecipe.user_id = await User.findOne(req.body);
+        req.session.save(() => {
+          req.session.user_id = userData.id;
+        });
+      },
+    },*/
     sequelize,
     timestamps: false,
     underscores: true,

@@ -1,22 +1,24 @@
 const submit = document.querySelector('#submit-button');
+//const { User } = require('../../models');
 
 async function newFormHandler(event){
     event.preventDefault();
-
+    
     const title = document.querySelector('#title').value;
     const ingredients = document.querySelector('#ingredients').value;
     const instructions = document.querySelector('#instructions').value;
     const author = 'placholder';
     const image = document.querySelector('#image').value;
-    const user_id = session.user_id;
     
 
    // document.getElementById("myForm").enctype = "multipart/form-data";
    // document.getElementById("myForm").method = "post";
    //document.getElementById("myForm").action = "/api/users";
-   console.log('newFormHandler');
+  
 
-const response = await fetch(`/api/recipe`,{
+   
+
+const response = await fetch('/api/recipe',{
     method:'POST',
     body:JSON.stringify({
         author, 
@@ -24,6 +26,7 @@ const response = await fetch(`/api/recipe`,{
         ingredients,
         instructions,
         image,
+
       }),
     headers:{
         'Content-Type':'application/json',
@@ -31,7 +34,7 @@ const response = await fetch(`/api/recipe`,{
 });
 if (response.ok) {
    console.log(response);
-    document.location.replace('/');
+    //document.location.replace('/');
   } else {
     alert('Failed to add dish');
   }
@@ -40,3 +43,4 @@ if (response.ok) {
 
 document.querySelector('.new-recipe-form');
 submit.addEventListener('click', newFormHandler);
+
