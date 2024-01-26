@@ -2,7 +2,8 @@ const router = require('express').Router();
 const { Recipe } = require('../../models/recipes');
 const multer  = require('multer');
 const upload = multer();
-router.post('/',upload.single("image") ,async (req, res) => {
+
+router.post('/', upload.single("image") ,async (req, res) => {
   try {
     const newRecipe = await Recipe.create({
       ...req.body,
