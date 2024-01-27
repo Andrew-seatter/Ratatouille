@@ -86,20 +86,30 @@ router.get('/explore', withAuth, async (req,res) => {
   try{
     
     const recipeDb = await Recipe.findAll({
-      include: [
+      attributes : [
+        'id',
+        'author',
+        'title',
+        'ingredients',
+        'instructions',
+        'image',
+        'comments'
+      ],
+     /* include: [
           {
               model: User,
               attributes: ['name']
           },
-      ],
+      ],*/
   });
 
-  console.log(recipeDb);
+  
   const recipes = recipeDb.map((recipe) =>
   recipe.get({plain: true}));
+  console.log(recipes);
 
   res.render('explore', {
-      ...recipes,
+      recipes,
       loggedIn: req.session.loggedIn,
   });
 } catch (err) {
