@@ -84,6 +84,7 @@ router.get('/profile/:id', withAuth, async (req, res) => {
 //Allrecipes/Explore page
 router.get('/explore', withAuth, async (req,res) => {
   try{
+    
     const recipeDb = await Recipe.findAll({
       include: [
           {
@@ -93,6 +94,7 @@ router.get('/explore', withAuth, async (req,res) => {
       ],
   });
 
+  console.log(recipeDb);
   const recipes = recipeDb.map((recipe) =>
   recipe.get({plain: true}));
 

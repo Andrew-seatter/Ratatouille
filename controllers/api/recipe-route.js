@@ -1,41 +1,23 @@
 const router = require('express').Router();
 const { Recipe, User } = require('../../models');
-const multer  = require('multer');
 
 
-/*const userData = await User.findOne(req.body);
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-    });*/
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../public/images')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix)
-  }
-})
 
-const upload = multer({ storage: storage });
-
-router.post('/', upload.single("image") , async (req, res) => {
- console.log(req.session.user);
+router.post('/' , async (req, res) => {
+ 
   try {
-    const userId = await User.findOne({
-      where: {
-        email: req.session.user,
-      },
-    });
-
-   console.log(userId);
+    console.log(req.session.user_id);
     const newRecipe = await Recipe.create({
-      user_id: 3,
-      ...req.body,
-    
+        user_id: req.session.user_id,
+        author: req.body.author,
+        title: req.body.title,
+        ingredients: req.body.ingredients,
+        instructions: req.body.instructions,
+        image: req.body.imaqe,
+        
     });
-
+    
     console.log(req);
 
     res.status(200).json(newRecipe);
@@ -45,7 +27,7 @@ router.post('/', upload.single("image") , async (req, res) => {
   }
 });
 
-router.post('/:id', upload.single("image") , async (req, res) => {
+router.post('/:id', async (req, res) => {
   try {
     console.log(req.session.user.id);
     const newRecipe = await Recipe.create({

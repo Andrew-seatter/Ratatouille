@@ -31,6 +31,7 @@ Recipe.init(
     comments: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: '',
     },
 
     user_id: {
@@ -43,29 +44,16 @@ Recipe.init(
     image: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: '',
     },
   },
 {
-   /* hooks: {
-      beforeCreate: async (newRecipe) => {
-        newRecipe.user_id = await User.findOne(req.body);
-        req.session.save(() => {
-          req.session.user_id = userData.id;
-        });
-      },
-
-      beforeUpdate: async (updatedRecipe) => {
-        updatedRecipe.user_id = await User.findOne(req.body);
-        req.session.save(() => {
-          req.session.user_id = userData.id;
-        });
-      },
-    },*/
+   
     sequelize,
     timestamps: false,
     underscores: true,
     freezeTableName: true,
-    modelName: "Recipe",
+    modelName: "recipe",
   }
 );
 
