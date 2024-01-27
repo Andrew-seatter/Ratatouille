@@ -1,11 +1,11 @@
 
     <div class="container">
-        <h1>{{User.name}}'s Profile</h1>
-        <img src="{{User.image}}" alt="{{User.name}}">
-        <p>Bio: {{User.bio}}</p>
+        <h1>{{user.name}}'s Profile</h1>
+        <img src="{{user.image}}" alt="{{user.name}}">
+        <p>Bio: {{user.bio}}</p>
         <h2>My Recipes</h2>
-        {{#each recipes as |Recipe|}}
-            {{> my-recipes Recipe }}
+        {{#each recipes as |recipe|}}
+            {{> my-recipes recipe }}
             {{/each}}
 
         <h2>Favorite Recipes</h2>

@@ -4,8 +4,8 @@
     <button type="submit">Search</button>
 
     <div class="all-recipes">
-        {{#each recipes as |Recipe|}}
-        {{> recipeCard Recipe }}
+        {{#each recipes as |recipe|}}
+        {{> recipeCard recipe }}
         {{/each}}
     </div>
 </div>

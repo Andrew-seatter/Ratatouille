@@ -9,7 +9,7 @@ async function newFormHandler(event){
     const instructions = document.querySelector('#instructions').value;
     const author = 'placholder';
     const image = document.querySelector('#image').value;
-    
+   
 
    // document.getElementById("myForm").enctype = "multipart/form-data";
    // document.getElementById("myForm").method = "post";
@@ -20,12 +20,13 @@ async function newFormHandler(event){
 
 const response = await fetch('/api/recipe',{
     method:'POST',
-    body:JSON.stringify({
+    body: JSON.stringify({
         author, 
         title,
         ingredients,
         instructions,
         image,
+        
 
       }),
     headers:{
@@ -39,7 +40,7 @@ if (response.ok) {
     alert('Failed to add dish');
   }
 
-}
+};
 
 document.querySelector('.new-recipe-form');
 submit.addEventListener('click', newFormHandler);

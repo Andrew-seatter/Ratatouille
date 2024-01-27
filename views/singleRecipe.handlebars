@@ -1,20 +1,20 @@
 <div class="recipe-card">
     <div class="card-header">
-        <h5>{{Recipe.title}}</h5>
-        <h8>Posted by {{Recipe.user.name}} on {{formatDate Recipe.created_at}}</h6>
+        <h5>{{recipe.title}}</h5>
+        <h8>Posted by {{recipe.user.name}} </h6>
     </div>
     <div class="card-body">
-        <img src="{{Recipe.image}}" alt="{{Recipe.author}}">
+        <img src="{{recipe.image}}" alt="{{recipe.author}}">
 
         <h2>Instructions</h2>
         <p>{{Recipe.instructions}}</p>
 
         <h2>Ingredients</h2>
-        <p>{{Recipe.ingredients}}</p>
+        <p>{{recipe.ingredients}}</p>
     </div>
     <div class="card-body comment">
-        {{#if Recipe.comments.length}}
-        {{> comments Recipe.comments}}
+        {{#if recipe.comments.length}}
+        {{> comments recipe.comments}}
         {{/if}}
     </div>
 </div>
