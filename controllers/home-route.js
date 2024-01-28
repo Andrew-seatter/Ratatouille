@@ -1,92 +1,93 @@
 const router = require('express').Router();
-const {User, Recipe, Comment} = require('../models/index');
-
+const { User, Recipe, Comment } = require('../models/index');
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const withAuth = require('../utils/auth');
 
 
 //login page
 router.get('/login', async (req, res) => {
-try {
+  try {
     res.render('login', {
-       });
-}  catch (err) {
+    });
+  } catch (err) {
     console.log(err);
     res.status(500).json(err);
-}
+  }
 });
 
 
 //home page
 router.get('/', withAuth, async (req, res) => {
-    try{
-        const recipeDb = await Recipe.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ['name']
-                },
-            ],
-        });
+  try {
+    const recipeDb = await Recipe.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name']
+        },
+      ],
+    });
 
-        const recipes = recipeDb.map((recipe) =>
-        recipe.get({plain: true}));
+    const recipes = recipeDb.map((recipe) =>
+      recipe.get({ plain: true }));
 
-        res.render('home', {
-            recipes,
-            loggedIn: req.session.loggedIn,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
+    res.render('home', {
+      recipes,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 //own person's profile route
 router.get('/profile', withAuth, async (req, res) => {
-    try {
-        // Find the logged in user based on the session ID
-        const userData = await User.findByPk(req.session.user_id, {
-          attributes: { exclude: ['password'] },
-          include: [{ model: Recipe }],
-        });
-    
-        const user = userData.get({ plain: true });
-    
-        res.render('profile', {
-          ...user,
-          logged_in: true
-        });
-      } catch (err) {
-        res.status(500).json(err)
-      }
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Recipe }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('profile', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 
 //someone else's profile route
 router.get('/profile/:id', withAuth, async (req, res) => {
-    try {
-        const userData = await User.findByPk(req.body.id, {
-          attributes: { exclude: ['password'] },
-          include: [{ model: Recipe }],
-        });
-    
-        const user = userData.get({ plain: true });
-    
-        res.render('profile', {
-          ...user,
-          logged_in: true
-        });
-      } catch (err) {
-        res.status(500).json(err)
-      }
+  try {
+    const userData = await User.findByPk(req.body.id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Recipe }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('profile', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 //Allrecipes/Explore page
-router.get('/explore', withAuth, async (req,res) => {
-  try{
-    
+router.get('/explore', withAuth, async (req, res) => {
+  try {
+
     const recipeDb = await Recipe.findAll({
-      attributes : [
+      attributes: [
         'id',
         'author',
         'title',
@@ -95,64 +96,77 @@ router.get('/explore', withAuth, async (req,res) => {
         'image',
         'comments'
       ],
-     /* include: [
-          {
-              model: User,
-              attributes: ['name']
-          },
-      ],*/
-  });
+      /* include: [
+           {
+               model: User,
+               attributes: ['name']
+           },
+       ],*/
+    });
 
-  
-  const recipes = recipeDb.map((recipe) =>
-  recipe.get({plain: true}));
-  console.log(recipes);
 
-  res.render('explore', {
+    const recipes = recipeDb.map((recipe) =>
+      recipe.get({ plain: true }));
+    console.log(recipes);
+
+    res.render('explore', {
       recipes,
       loggedIn: req.session.loggedIn,
-  });
-} catch (err) {
-  console.log(err);
-  res.status(500).json(err);
-}
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 
 
 router.get('/post', withAuth, async (req, res) => {
-  try{
+  try {
     res.render('addRecipe', {
       loggedIn: req.session.loggedIn,
     });
   } catch {
     console.log(err);
-    res.status(500),json(err);
+    res.status(500), json(err);
   }
 })
 
 //get the recipe details based on name searched
 
-router.get('/:title',async(req,res)=>{
-  try{
-const RecipeData=await Recipe.findOne({
-  where:{
-    title:req.params.title,
-  },
-});
+router.get('/:title', async (req, res) => {
 
-if(RecipeData){
-  const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
-  
-  res.render('recipeCard',{recipe});
+  Recipe.findAll({
+    where: {
+      title: { [Op.like]: `%${req.params.title}%` }
+    }
+  }).then(response => {
+    console.log(response)
+    const recipeList = response.map((recipe) => recipe.get({ plain: true }));
+    console.log(recipeList);
+    res.render('searchrecipe', { recipes:recipeList});
+  }).catch(err => {
+    console.log(err)
+  })
+  //   console.log(req.params.title,"paramsDetails");
+  //   try{
+  // const RecipeData=await Recipe.findOne({
+  //   where:{
+  //     title: "Apple Pie",// {[Op.iLike]: `%${req.params.title}%`}  },
+  // }});
 
-}else{
-  res.status(404).json({ message: 'NoRecipe found with this title!' });
+  // if(RecipeData){
+  //   const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
+  //   console.log(recipe);
+  //   res.render('recipeCard',{recipe});
 
-}
-  }catch (err){
-    res.status(500).json(err);
-  }
+  // }else{
+  //   res.status(404).json({ message: 'NoRecipe found with this title!' });
+
+  // }
+  //   }catch (err){
+  //     res.status(500).json(err);
+  //   }
 });
 
 
