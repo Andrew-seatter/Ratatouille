@@ -118,7 +118,6 @@ router.get('/explore', withAuth, async (req,res) => {
 }
 });
 
-module.exports = router;
 
 
 router.get('/post', withAuth, async (req, res) => {
@@ -131,3 +130,30 @@ router.get('/post', withAuth, async (req, res) => {
     res.status(500),json(err);
   }
 })
+
+//get the recipe details based on name searched
+
+router.get('/:title',async(req,res)=>{
+  try{
+const RecipeData=await Recipe.findOne({
+  where:{
+    title:req.params.title,
+  },
+});
+
+if(RecipeData){
+  const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
+  
+  res.render('recipeCard',{recipe,loggedIn: req.session.loggedIn});
+
+}else{
+  res.status(404).json({ message: 'NoRecipe found with this title!' });
+
+}
+  }catch (err){
+    res.status(500).json(err);
+  }
+});
+
+
+module.exports = router;

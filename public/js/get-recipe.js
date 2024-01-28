@@ -1,23 +1,20 @@
 async function newFormHandler(event){
     event.preventDefault();
 
-    const title =document.querySelector('#title').value;
-    const description=document.querySelector('#description').value;
-    const ingredients=document.querySelector('#ingredients').value;
-    const instructions=document.querySelector('#instructions').value;
-    const comments=document.querySelector('#comments').value;
-    const userid=document.querySelector('#userid').value;
+    const title =document.getElementById('#title').value;
+  
 
 
-const response = await fetch(`api/recipe`);
+const response = await fetch(`/${title}`);
 if (response.ok) {
-    document.location.replace('/');
+  console.log(response);
+    //document.location.replace(`/api/recipe/${title}`);
   } else {
-    alert('Failed to get dishes');
+    alert('Failed to get recipes');
   }
 
 }
 
 document
-  .querySelector('.new-recipe-form')
+  .querySelector('.search-form')
   .addEventListener('submit', newFormHandler);
