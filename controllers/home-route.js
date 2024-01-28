@@ -144,7 +144,7 @@ const RecipeData=await Recipe.findOne({
 if(RecipeData){
   const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
   
-  res.render('recipeCard',{recipe,loggedIn: req.session.loggedIn});
+  res.render('recipeCard',{recipe});
 
 }else{
   res.status(404).json({ message: 'NoRecipe found with this title!' });
@@ -157,3 +157,4 @@ if(RecipeData){
 
 
 module.exports = router;
+
