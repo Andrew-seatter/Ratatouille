@@ -1,8 +1,8 @@
 async function newFormHandler(event){
   event.preventDefault();
 
-  const title = document.getElementById('title').value;
-console.log(title, "Search");
+  const search = document.querySelector('#search-text').value;
+console.log(search, "Search");
 
 
 const response = await fetch(`/${title}`,{
@@ -21,7 +21,7 @@ console.log( response );
 
 }
 
-const submitButton = document.querySelector('#search-submit-button')
+const submitButton = document.querySelector('#submit-search-button')
 submitButton.addEventListener('click', newFormHandler);
 
 

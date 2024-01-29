@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Recipe, User } = require('../../models');
+const moment = require('moment');
+
 
 
 
@@ -7,7 +9,11 @@ const { Recipe, User } = require('../../models');
 router.post('/' , async (req, res) => {
  
   try {
-    console.log(req.session.user_id);
+    let now = moment();
+    let Date = now.toDate();
+    let timestamp = Date.toString();
+
+    console.log(timestamp);
     const newRecipe = await Recipe.create({
         user_id: req.session.user_id,
         author: req.body.author,
@@ -15,6 +21,7 @@ router.post('/' , async (req, res) => {
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
         image: req.body.image,
+        timestamp: timestamp,
         
     });
     
