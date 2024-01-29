@@ -1,26 +1,31 @@
 async function newFormHandler(event){
-    event.preventDefault();
+  event.preventDefault();
 
-    const title =document.getElementById('title').value;
+  const title =document.getElementById('title').value;
 console.log(title,"Search");
 
 
 const response = await fetch(`/${title}`,{
-  method:'GET',
-  headers:{
-    'content-Type':'application/json',
-  },
+method:'GET',
+headers:{
+  'content-Type':'application/json',
+},
 });
 if (response.ok) {
-  //const data=response.json();
-  //console.log(data,"Result");
-  console.log(  );
-  } else {
-    alert('Failed to get recipes');
-  }
+//const data=response.json();
+//console.log(data,"Result");
+console.log( response );
+} else {
+  alert('Failed to get recipes');
+}
 
 }
 
 document
-  .querySelector('.search-form')
-  .addEventListener('submit', newFormHandler);
+.querySelector('.search-form')
+.addEventListener('submit', newFormHandler);
+
+
+
+
+
