@@ -21,7 +21,7 @@ body {
     padding: 10px 20px;
 }
 
-.container {
+.nav-container {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -30,7 +30,7 @@ body {
     justify-content: space-around;
 }
 
-.login-container {
+/* .login-container {
     display: flex;
     width: 100%;
     min-height: 42em;
@@ -38,7 +38,7 @@ body {
     flex-direction: row;
     align-content: center;
     justify-content: space-around;
-}
+} */
 
 .navbar a {
     color: #ffffff; 
