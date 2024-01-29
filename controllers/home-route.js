@@ -120,7 +120,7 @@ router.get('/explore', withAuth, async (req,res) => {
         'ingredients',
         'instructions',
         'image',
-        'comments'
+        'timestamp'
       ],
 
   });
