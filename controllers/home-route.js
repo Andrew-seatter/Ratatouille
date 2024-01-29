@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {User, Recipe, Comment} = require('../models/index');
+const { Op } = require('sequelize');
 
 const withAuth = require('../utils/auth');
 
@@ -118,7 +119,6 @@ router.get('/explore', withAuth, async (req,res) => {
 }
 });
 
-module.exports = router;
 
 
 router.get('/post', withAuth, async (req, res) => {
@@ -130,4 +130,53 @@ router.get('/post', withAuth, async (req, res) => {
     console.log(err);
     res.status(500),json(err);
   }
-})
+});
+
+router.get('/:title', async (req, res) => {
+  console.log(`${req.params.title}`);
+
+  Recipe.findAll({
+    where: {
+      title: { [Op.like]: `%${req.params.title}%` }
+    },
+    attributes:['id',
+    'author',
+    'title',
+    'instructions',
+    'ingredients',
+    'comments',
+    'user_id',
+    'image'
+  ],
+
+  
+  }).then(response => {
+    console.log(response)
+    const recipe = response.map((RecipeData) => RecipeData.get({ plain: true }));
+    console.log(recipe);
+    res.render('singleRecipe', {recipe});
+  }).catch(err => {
+    console.log(err);
+  })
+  //   console.log(req.params.title,"paramsDetails");
+  //   try{
+  // const RecipeData=await Recipe.findOne({
+  //   where:{
+  //     title: "Apple Pie",// {[Op.iLike]: `%${req.params.title}%`}  },
+  // }});
+
+  // if(RecipeData){
+  //   const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
+  //   console.log(recipe);
+  //   res.render('recipeCard',{recipe});
+
+  // }else{
+  //   res.status(404).json({ message: 'NoRecipe found with this title!' });
+
+  // }
+  //   }catch (err){
+  //     res.status(500).json(err);
+  //   }
+});
+
+module.exports = router;
