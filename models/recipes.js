@@ -28,7 +28,10 @@ Recipe.init(
       type: DataTypes.TEXT('long'),
       allowNull: false,
     },
-
+    timestamp: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
 
     user_id: {
       type: DataTypes.INTEGER,
