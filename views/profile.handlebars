@@ -4,8 +4,8 @@
         <img src="{{user.image}}" alt="{{user.name}}">
         <p>Bio: {{user.bio}}</p>
         <h2>My Recipes</h2>
-        {{#each recipes as |recipe|}}
-            {{> my-recipes recipe }}
+        {{#each myRecipes as |recipe|}}
+            {{> recipeCard recipe }}
             {{/each}}
 
         <h2>Favorite Recipes</h2>

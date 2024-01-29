@@ -1,8 +1,10 @@
 <section class="cards">
-<div class="recipe-card" href="/recipe/{{id}}">
+  <a href="/recipe/{{id}}">
+<div class="recipe-card">
 <figure>
 <img src="{{image}}" alt="{{title}}">
 </figure>
+</a>
   <div class="card-body">
     <h2>{{title}}</h2>
     <h4>Posted by {{author}}</h4>
@@ -10,11 +12,6 @@
 
        </div>
 
-    <p class="instructions-tooltip">Instruction</p>
-    <span class="instructions-tooltip-text">{{instructions}}</span>
-
-    <p class="comments-tooltip">Comments</p>
-    <span class="comments-tooltip-text">{{comments}}</span>
     
     
 </div>

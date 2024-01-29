@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {User, Recipe, Comment} = require('../models/index');
+const { findByPk } = require('../models/user');
 
 const withAuth = require('../utils/auth');
 
@@ -41,6 +42,8 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
+
+
 //own person's profile route
 router.get('/profile', withAuth, async (req, res) => {
     try {
@@ -51,10 +54,20 @@ router.get('/profile', withAuth, async (req, res) => {
         });
     
         const user = userData.get({ plain: true });
+
+        const userRecipes = await Recipe.findAll({
+          where: {
+            user_id: req.session.user_id,
+          }
+        });
+
+        const myRecipes = userRecipes.map((recipe) =>
+        recipe.get({plain: true}));
     
         res.render('profile', {
           ...user,
-          logged_in: true
+          myRecipes,
+          loggedIn: req.session.loggedIn
         });
       } catch (err) {
         res.status(500).json(err)
@@ -64,22 +77,35 @@ router.get('/profile', withAuth, async (req, res) => {
 
 //someone else's profile route
 router.get('/profile/:id', withAuth, async (req, res) => {
-    try {
-        const userData = await User.findByPk(req.body.id, {
-          attributes: { exclude: ['password'] },
-          include: [{ model: Recipe }],
-        });
-    
-        const user = userData.get({ plain: true });
-    
-        res.render('profile', {
-          ...user,
-          logged_in: true
-        });
-      } catch (err) {
-        res.status(500).json(err)
+  try {
+    // Find the logged in user based on the params ID
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Recipe }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const userRecipes = await Recipe.findAll({
+      where: {
+        user_id: req.session.user_id,
       }
+    });
+
+    const myRecipes = userRecipes.map((recipe) =>
+    recipe.get({plain: true}));
+
+    res.render('profile', {
+      ...user,
+      myRecipes,
+      loggedIn: req.session.loggedIn
+    });
+  } catch (err) {
+    res.status(500).json(err)
+  }
 });
+
+
 
 //Allrecipes/Explore page
 router.get('/explore', withAuth, async (req,res) => {
@@ -95,12 +121,7 @@ router.get('/explore', withAuth, async (req,res) => {
         'image',
         'comments'
       ],
-     /* include: [
-          {
-              model: User,
-              attributes: ['name']
-          },
-      ],*/
+
   });
 
   
@@ -121,13 +142,33 @@ router.get('/explore', withAuth, async (req,res) => {
 module.exports = router;
 
 
+
+
 router.get('/post', withAuth, async (req, res) => {
   try{
     res.render('addRecipe', {
       loggedIn: req.session.loggedIn,
     });
-  } catch {
+  } catch (err) {
     console.log(err);
     res.status(500),json(err);
   }
 })
+
+
+
+router.get('/recipe/:id', withAuth, async (req, res) => {
+  try{
+    const recipePk = await Recipe.findByPk(req.params.id);
+
+      const recipe = recipePk.get({ plain: true });
+      
+      res.render('singleRecipe', {
+        recipe,
+        loggedIn: req.session.loggedIn
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});

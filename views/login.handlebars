@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
 	<title>Social - Network, Community and Event Theme</title>
 
@@ -76,25 +75,19 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
-	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	 
 </head>
 
-<body>
-    {{> navbar}}
 
-    <div class="container">
+    
+
+    <div class="login-container">
         <h1>Login to Ratatoullie</h1>
 <div class="row">
   <div class="col-md-6"> 
     <h2>Login</h2>
 
-    <form class="form login-form">
+    <form class="form-login-form">
       <div class="form-group">
         <label for="email-login">email:</label>
         <input class="form-input" type="text" id="email-login" />
@@ -103,7 +96,7 @@
         <label for="password-login">password:</label>
         <input class="form-input" type="password" id="password-login" />
       </div>
-      <div class="form-group">
+      <div class="login-form">
         <button class="btn btn-primary" type="submit">login</button>
       </div>
     </form>
@@ -111,7 +104,7 @@
   <div class="col-md-6">
     <h2>Signup</h2>
 
-    <form class="form signup-form">
+    <form class="form-signup-form">
       <div class="form-group">
         <label for="name-signup">name:</label>
         <input class="form-input" type="text" id="name-signup" />
@@ -124,13 +117,13 @@
         <label for="password-signup">password:</label>
         <input class="form-input" type="password" id="password-signup" />
       </div>
-      <div class="form-group">
+      <div class="signup-form">
         <button class="btn btn-primary" type="submit">signup</button>
       </div>
     </form>
-  </div>
 </div>
 
 <script src='./js/login.js'></script>
-</body>
-</html>
+
+</div>
+</div>

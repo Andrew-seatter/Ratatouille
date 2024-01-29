@@ -28,11 +28,7 @@ Recipe.init(
       type: DataTypes.TEXT('long'),
       allowNull: false,
     },
-    comments: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: '',
-    },
+
 
     user_id: {
       type: DataTypes.INTEGER,
