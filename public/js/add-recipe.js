@@ -1,18 +1,17 @@
-const submit = document.querySelector('#submit-button');
+const post = document.querySelector('#post-button');
 //const { User } = require('../../models');
-const moment = require('moment');
-let now = moment();
-let timestamp = now.toDate();
 
-async function newFormHandler(event){
+
+
+async function newPostHandler(event){
     event.preventDefault();
     
     const title = document.querySelector('#title').value;
     const ingredients = document.querySelector('#ingredients').value;
     const instructions = document.querySelector('#instructions').value;
-    const author = document.querySelector('#author');
+    const author = document.querySelector('#author').value;
     const image = document.querySelector('#image').value;
-  
+     
 
    const response = await fetch('/api/recipe',{
     method:'POST',
@@ -22,7 +21,7 @@ async function newFormHandler(event){
         ingredients,
         instructions,
         image,
-        timestamp
+       
         
 
       }),
@@ -40,5 +39,5 @@ if (response.ok) {
 };
 
 document.querySelector('.new-recipe-form');
-submit.addEventListener('click', newFormHandler);
+post.addEventListener('click', newPostHandler);
 

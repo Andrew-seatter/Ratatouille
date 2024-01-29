@@ -1,5 +1,9 @@
 const sequelize = require('../config/connection');
 const { User, Recipe } = require('../models');
+const moment = require('moment');
+let now = moment();
+let Date = now.toDate();
+let DateString = Date.toString();
 
 const userData = require('./userData.json');
 const recipeData = require('./recipeData.json');
@@ -22,6 +26,7 @@ const seedDatabase = async () => {
       ...recipe,
       user_id: individualUser.id,
       author: individualUser.name,
+      timestamp: DateString,
 });
   }
 
