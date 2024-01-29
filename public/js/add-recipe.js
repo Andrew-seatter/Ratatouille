@@ -1,5 +1,8 @@
 const submit = document.querySelector('#submit-button');
 //const { User } = require('../../models');
+const moment = require('moment');
+let now = moment();
+let timestamp = now.toDate();
 
 async function newFormHandler(event){
     event.preventDefault();
@@ -7,7 +10,7 @@ async function newFormHandler(event){
     const title = document.querySelector('#title').value;
     const ingredients = document.querySelector('#ingredients').value;
     const instructions = document.querySelector('#instructions').value;
-    const author = 'placholder';
+    const author = document.querySelector('#author');
     const image = document.querySelector('#image').value;
   
 
@@ -19,6 +22,7 @@ async function newFormHandler(event){
         ingredients,
         instructions,
         image,
+        timestamp
         
 
       }),

@@ -175,14 +175,15 @@ router.get('/recipe/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/:title', async (req, res) => {
-  console.log(`${req.params.title}`);
+router.get('/search', async (req, res) => {
+  console.log(`${req.body}`);
 
   Recipe.findAll({
     where: {
-      title: { [Op.like]: `%${req.params.title}%` }
+      title: req.body
     },
-    attributes:['id',
+    attributes:[
+    'id',
     'author',
     'title',
     'instructions',
