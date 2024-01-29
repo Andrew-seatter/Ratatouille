@@ -9,16 +9,9 @@ async function newFormHandler(event){
     const instructions = document.querySelector('#instructions').value;
     const author = 'placholder';
     const image = document.querySelector('#image').value;
-   
-
-   // document.getElementById("myForm").enctype = "multipart/form-data";
-   // document.getElementById("myForm").method = "post";
-   //document.getElementById("myForm").action = "/api/users";
   
 
-   
-
-const response = await fetch('/api/recipe',{
+   const response = await fetch('/api/recipe',{
     method:'POST',
     body: JSON.stringify({
         author, 
