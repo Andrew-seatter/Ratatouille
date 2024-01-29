@@ -31,6 +31,7 @@ Recipe.init(
     timestamp: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: '',
     },
 
     user_id: {
