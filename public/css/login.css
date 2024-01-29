@@ -1,11 +1,4 @@
-.search-form {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-form input[type="text"] {
+.form-input {
     font-size: 16px;
     padding: 10px;
     margin-right: 10px;
@@ -16,11 +9,11 @@
     transition: all 0.3s ease-in-out;
 }
 
-.search-form input[type="text"]:focus {
+.form-input:focus {
     border-color: #066962;
 }
 
-.search-form button {
+.btn-primary {
     padding: 10px 20px;
     background-color: #0abab5;
     color: #ffffff;
@@ -30,6 +23,6 @@
     transition: background-color 0.3s ease-in-out;
 }
 
-.search-form button:hover {
+.btn-primary:hover {
     background-color: #066962;
 }

@@ -1,0 +1,25 @@
+.story-component {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f1f6f6; 
+    border-color: 1px solid #00a0b0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #00a0b0; 
+    text-align: left; 
+    font-family: cursive; 
+}
+
+.story-component h2 {
+    font-size: 24px;
+    color: #00a0b0; 
+    margin-bottom: 10px;
+    text-align: center; 
+}
+
+.story-component p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #00a0b0; 
+}
