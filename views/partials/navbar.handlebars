@@ -1,19 +1,26 @@
 <nav class="navbar">
     <div class="container">
-        <a href="/">Ratatoullie</a>
+        <div class="menu-icon">
+
+        </div>
+        <div class="nav-dropdown">
+            <a href="#" class="dropdown-toggle">Ratatouille</a>
+            <div class="dropdown-content">
+
+                <a href="/">About</a>
+                <a href="/explore">Explore</a>
+                {{#if loggedIn}}
+                    <a href="/profile">My Profile</a>
+                    <a href="/logout">Logout</a>
+                {{else}}
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                {{/if}}
+            </div>
+        </div>
         <div class="search-form">
             <input type="text" placeholder="Search Recipes...">
             <button type="submit">Search</button>
         </div>
-        <ul class="nav-links">
-            <li><a href="/">About</a></li>
-            <li><a href="/explore">Explore</a></li>
-            {{#if loggedIn}}
-                <li><a href="/profile">My Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-            {{else}}
-                <li><a href="/login">Login</a></li>
-            {{/if}}
-        </ul>
     </div>
 </nav>
