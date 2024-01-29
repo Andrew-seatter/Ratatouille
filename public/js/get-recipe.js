@@ -14,7 +14,7 @@ const response = await fetch(`/${title}`,{
 if (response.ok) {
   //const data=response.json();
   //console.log(data,"Result");
-  console.log(response);
+  console.log(  );
   } else {
     alert('Failed to get recipes');
   }

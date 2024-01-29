@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Recipe, Comment } = require('../models/index');
-const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
+const { Op } = require('sequelize');
+
 const withAuth = require('../utils/auth');
 
 
@@ -96,12 +96,12 @@ router.get('/explore', withAuth, async (req, res) => {
         'image',
         'comments'
       ],
-      /* include: [
+      include: [
            {
                model: User,
                attributes: ['name']
            },
-       ],*/
+       ],
     });
 
 
@@ -135,18 +135,30 @@ router.get('/post', withAuth, async (req, res) => {
 //get the recipe details based on name searched
 
 router.get('/:title', async (req, res) => {
+  console.log(`${req.params.title}`);
 
   Recipe.findAll({
     where: {
       title: { [Op.like]: `%${req.params.title}%` }
-    }
+    },
+    attributes:['id',
+    'author',
+    'title',
+    'instructions',
+    'ingredients',
+    'comments',
+    'user_id',
+    'image'
+  ],
+
+  
   }).then(response => {
     console.log(response)
     const recipeList = response.map((recipe) => recipe.get({ plain: true }));
     console.log(recipeList);
-    res.render('searchrecipe', { recipes:recipeList});
+    res.render('searchrecipe', {recipeList});
   }).catch(err => {
-    console.log(err)
+    console.log(err);
   })
   //   console.log(req.params.title,"paramsDetails");
   //   try{
