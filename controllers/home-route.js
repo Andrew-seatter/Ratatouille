@@ -173,7 +173,7 @@ router.get('/recipe/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-});
+
 
 router.get('/:title', async (req, res) => {
   console.log(`${req.params.title}`);
