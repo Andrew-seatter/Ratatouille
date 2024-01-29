@@ -1,14 +1,14 @@
 
 <div class="edit-recipe-container">
-  <h2>
+  <h5 class="header-color">
     Add Recipe
-  </h2>
+  </h5>
   <form id="myForm" class="add-recipe-form">
      <label for="author">
       Author:
     </label>
-    <br />
-    <textarea id="author" name="author" rows="2" cols="30">
+    <br/>
+    <textarea id="author" name="author"  >
       {{author}}
     </textarea>
     <br />
@@ -16,7 +16,7 @@
       Recipe Name:
     </label>
     <br />
-    <textarea id="title" name="title" rows="2" cols="30">
+    <textarea id="title" name="title" >
       {{title}}
     </textarea>
     <br />
@@ -24,7 +24,7 @@
       Instructions:
     </label>
      <br />
-    <textarea id="instructions" name="instructions" rows="2" cols="30">
+    <textarea id="instructions" name="instructions"rows="4" cols="40">
       {{instructions}}
     </textarea>
     <br />
@@ -32,7 +32,7 @@
       Ingredients:
     </label>
     <br />
-    <textarea id="ingredients" name="ingredients" rows="2" cols="30">
+    <textarea id="ingredients" name="ingredients" rows="3" col="40" >
       {{ingredients}}
     </textarea>
     <br />
@@ -40,10 +40,12 @@
       Image:
     </label>
      <br />
-    <textarea id="image" name="image" rows="2" cols="30">
+    <textarea id="image" name="image">
       {{image}}
     </textarea>
+
   <button id="post-button" type="submit" value="Submit">
+
         Submit
       </button>
     </form>
