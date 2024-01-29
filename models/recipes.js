@@ -30,7 +30,7 @@ Recipe.init(
     },
     timestamp: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: '',
     },
 
