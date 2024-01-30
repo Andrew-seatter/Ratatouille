@@ -154,15 +154,13 @@ router.get('/post', withAuth, async (req, res) => {
     res.status(500),json(err);
   }
 
-})
-
-
+});
 
 router.get('/recipe/:id', withAuth, async (req, res) => {
   try{
     const recipePk = await Recipe.findByPk(req.params.id);
 
-      const recipe = recipePk.get({ plain: true });
+      const recipe = recipePk.get({ plain: true });;
       
       res.render('singleRecipe', {
         recipe,
@@ -175,10 +173,37 @@ router.get('/recipe/:id', withAuth, async (req, res) => {
 });
 
 
-router.get('/search', async (req, res) => {
-  console.log(`${req.body}`);
 
-  Recipe.findAll({
+router.get('/editrecipe/:id', withAuth, async (req, res) => {
+  try{
+    const recipePk = await Recipe.findByPk(req.params.id, {
+      attributes : [
+        'id',
+        'author',
+        'title',
+        'ingredients',
+        'instructions',
+        'image',
+        'timestamp'
+      ],
+    });
+
+      const recipe = recipePk.get({ plain: true });
+      
+      res.render('editRecipe', {
+        recipe,
+        loggedIn: req.session.loggedIn
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+router.get('/search', async (req, res) => {
+  try{
+ const searchResults =  Recipe.findAll({
     where: {
       title: req.body
     },
@@ -192,36 +217,18 @@ router.get('/search', async (req, res) => {
     'user_id',
     'image'
   ],
+ });
 
-  
-  }).then(response => {
-    console.log(response)
-    const recipe = response.map((RecipeData) => RecipeData.get({ plain: true }));
-    console.log(recipe);
-    res.render('singleRecipe', {recipe});
-  }).catch(err => {
-    console.log(err);
-  })
-  //   console.log(req.params.title,"paramsDetails");
-  //   try{
-  // const RecipeData=await Recipe.findOne({
-  //   where:{
-  //     title: "Apple Pie",// {[Op.iLike]: `%${req.params.title}%`}  },
-  // }});
+const recipes = searchResults.map((searchResult) => searchResult.get({ plain: true }));
+res.render('searchrecipe', {recipes, loggedIn: req.session.loggedIn});
 
-  // if(RecipeData){
-  //   const recipe =RecipeData.map((recipe)=>recipe.get({plain:true}));
-  //   console.log(recipe);
-  //   res.render('recipeCard',{recipe});
-
-  // }else{
-  //   res.status(404).json({ message: 'NoRecipe found with this title!' });
-
-  // }
-  //   }catch (err){
-  //     res.status(500).json(err);
-  //   }
+} catch (err) {
+  console.log(err);
+  res.status(500).json(err);
+}
 });
+  
+  
 
 module.exports = router;
 
