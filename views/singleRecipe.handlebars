@@ -1,15 +1,15 @@
 <div class="recipe-card">
     <div class="card-header">
-        <h5>{{recipe.title}}</h5>
-        <h8>Posted by {{recipe.user.name}} </h6>
+        <h2>{{recipe.title}}</h2>
+        <h6>Posted by {{recipe.user.name}} </h6>
     </div>
     <div class="card-body">
         <img src="{{recipe.image}}" alt="{{recipe.author}}">
 
-        <h2>Instructions</h2>
-        <p>{{Recipe.instructions}}</p>
+        <h6>Instructions</h6>
+        <p>{{recipe.instructions}}</p>
 
-        <h2>Ingredients</h2>
+        <h6>Ingredients</h6>
         <p>{{recipe.ingredients}}</p>
     </div>
     <div class="card-body comment">
@@ -21,17 +21,5 @@
 
 <input type="hidden" name="recipe-id" value="{{Recipe.id}}" />
 
-{{#if loggedIn}}
-<div class="card">
-    <div class="card-header"></div>
-    <form class="card-body comment-form">
-        <p class="form-label">Leave Comment:</p>
-        <textarea class="form-input" id="comment" name="comment-body"></textarea>
-        <button type="submit" class="btn btn-primary">Submit Comment</button>
-    </form>
-</div>
-{{/if}}
 
-{{#if loggedIn}}
 <script src="./public/js/comments.js"></script>
-{{/if}}
