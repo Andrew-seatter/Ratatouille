@@ -1,12 +1,7 @@
 
-    <div class="container">
-        <h1>{{user.name}}'s Profile</h1>
-        <img src="{{user.image}}" alt="{{user.name}}">
-        <p>Bio: {{user.bio}}</p>
-        <h2>My Recipes</h2>
+  <h1 class="myrecipe-T">My Recipes</h1>
+    <div class="profile-container">
         {{#each myRecipes as |recipe|}}
             {{> recipeCard recipe }}
             {{/each}}
-
-        <h2>Favorite Recipes</h2>
     </div>

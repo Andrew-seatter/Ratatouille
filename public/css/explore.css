@@ -5,6 +5,14 @@
     justify-content: center;
     align-items:center;
 }
+.myrecipe-T{
+  text-align: center;
+}
+.profile-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .welcome{
   text-align: center;
   padding: 3%;
