@@ -14,8 +14,10 @@ body {
 /* Navbar Styles */
 .footer {
 	/* adding positionng of the footbar */
-	margin-top: 10px;
+	position: relative;
+	bottom: 0;
 	width: 100%;
+
 	background-color: #0abab5;
 	color: #ffffff;
 	display: flex;
